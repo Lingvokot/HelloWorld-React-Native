@@ -1,3 +1,4 @@
+/* @flow */
 import React, {
   AppRegistry,
   Component,
@@ -11,6 +12,10 @@ class HelloWorldReactNative extends Component {
       <App />
     );
   }
+}
+
+if (__DEV__) {
+  window.React = global.React = React;
 }
 
 AppRegistry.registerComponent(`HelloWorldReactNative`, () => HelloWorldReactNative);

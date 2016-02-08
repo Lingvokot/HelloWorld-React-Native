@@ -1,26 +1,27 @@
+/* @flow */
 import React, {
-  StyleSheet,
   Component,
-  View,
+  Navigator,
 } from 'react-native';
 
+import RedSquare from './RedSquare.js';
 import HelloWorld from './HelloWorld.js';
-
-const styles =  StyleSheet.create({
-  App: {
-    flex : 1,
-    justifyContent : `center`,
-    alignItems : `center`,
-    backgroundColor : `#F5FCFF`,
-  },
-});
 
 class App extends Component {
   render () {
     return (
-      <View style={styles.App}>
-        <HelloWorld />
-      </View>
+      <Navigator
+        configureScene={ (route, routeStack) => Navigator.SceneConfigs.FadeAndroid }
+        initialRoute={{name: `HelloWorld`}}
+        renderScene={(route, navigator) => {
+          switch (route.name) {
+            case `RedSquare`:
+              return <RedSquare onButtonPress={ () => navigator.push({name: `HelloWorld`}) } />;
+            case `HelloWorld`:
+              return <HelloWorld onPress={ () => navigator.push({name: `RedSquare`}) } />;
+          }
+        }}
+      />
     );
   }
 }
